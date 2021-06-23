@@ -16,7 +16,6 @@ func _ready():
 func seek():
 	var steer = Vector2.ZERO
 	if player:
-		print("playa")
 		var desired = (player.position - position).normalized() * speed
 		steer = (desired - velocity).normalized() * tracking
 	return steer

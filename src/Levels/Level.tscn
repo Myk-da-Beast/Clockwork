@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Clock.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112.933, 461.185 )
+JUMP_FORCE = 2560
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clock" parent="." instance=ExtResource( 4 )]
+position = Vector2( 534.997, 234.529 )
+[connection signal="timeout" from="Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="Clock" method="_on_Timer_timeout"]

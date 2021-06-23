@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Clockwork"
-run/main_scene="res://Scenes/Level.tscn"
+run/main_scene="res://Levels/Level 1.tscn"
 
 [input]
 
