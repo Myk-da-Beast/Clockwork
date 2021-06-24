@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
 onready var player = $"../Player"
+onready var animatedSprite = $AnimatedSprite
 
-var speed = 350
+var speed = 3.5
 var velocity = Vector2.ZERO
 var acceleration = Vector2.ZERO
 var tracking = 500.0
@@ -12,17 +13,15 @@ func _ready():
 	var speedx = rand_range(-5, 5)
 	var speedy = rand_range(-5, 5)
 	velocity = Vector2(speedx, speedy)
-
-func seek():
-	var steer = Vector2.ZERO
-	if player:
-		var desired = (player.position - position).normalized() * speed
-		steer = (desired - velocity).normalized() * tracking
-	return steer
+	animatedSprite.play("idle")
 	
 func _physics_process(delta):
-	acceleration = seek()
-	velocity += acceleration * delta
-	velocity = velocity.clamped(speed)
-	rotation = velocity.angle()
-	position += velocity * delta
+	velocity = position.direction_to(player.position) * speed
+	if velocity.x > 0:
+		animatedSprite.flip_h = true
+	else:
+		animatedSprite.flip_h = false
+	var collision = move_and_collide(velocity)
+	if collision is KinematicCollision2D and collision.collider is Node:
+		if collision.collider.is_in_group('Player'):
+			Global.reset_current_scene()

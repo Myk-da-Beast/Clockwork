@@ -15,24 +15,14 @@ func _state_logic(delta):
 func _get_transition(delta):
 	match state:
 		states.idle:
-			if !parent.is_on_floor():
-				if parent.velocity.y < 0:
-					return states.jump
-				elif parent.velocity.y > 0:
-					return states.fall
-			elif Input.is_action_pressed("jump"):
+			if Input.is_action_pressed("jump"):
 				return states.jump
-			elif parent.velocity.x != 0:
+			elif abs(parent.velocity.x) > 1:
 				return states.run
 		states.run:
-			if !parent.is_on_floor():
-				if parent.velocity.y < 0:
-					return states.jump
-				elif parent.velocity.y > 0:
-					return states.fall
-			elif Input.is_action_pressed("jump"):
+			if Input.is_action_pressed("jump"):
 				return states.jump
-			elif parent.velocity.x == 0:
+			elif parent.velocity.x == 0 || abs(parent.velocity.x) < 1:
 				return states.idle
 		states.jump:
 			if parent.is_on_floor():
@@ -42,8 +32,6 @@ func _get_transition(delta):
 		states.fall:
 			if parent.is_on_floor():
 				return states.idle
-			elif parent.velocity.y <= 0:
-				return states.jump
 				
 	return null
 
@@ -51,10 +39,13 @@ func _enter_state(newState, oldState):
 	match newState:
 		states.idle:
 			parent.stateLabel.text = "idle"
+			parent.animatedSprite.play("idle")
 		states.run:
 			parent.stateLabel.text = "run"
+			parent.animatedSprite.play("run")
 		states.jump:
 			parent.stateLabel.text = "jump"
+			parent.animatedSprite.play("jump")
 		states.fall:
 			parent.stateLabel.text = "fall"
 	pass

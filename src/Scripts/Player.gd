@@ -1,17 +1,16 @@
 extends KinematicBody2D
 
 export var ACCELERATION = 64
-export var MAX_SPEED = 768
+export var MAX_SPEED = 512
 export var FRICTION = 0.25
 export var AERIAL_H_RESISTANCE = 0.02
 export var GRAVITY = 1980
-export var JUMP_FORCE = 888
+export var JUMP_FORCE = 980
 
 var velocity = Vector2.ZERO
 var deadZone = 0.1
 
 onready var sprite = $Sprite
-onready var animationPlayer = $AnimationPlayer
 onready var animatedSprite = $AnimatedSprite
 onready var stateLabel = $StateLabel
 onready var stateMachine = $StateMachine
@@ -19,8 +18,8 @@ onready var stateMachine = $StateMachine
 func _apply_velocity(delta):
 	handle_input()
 	
-	if (!is_on_floor()):
-		velocity.y += GRAVITY * delta
+	#if (!is_on_floor()):
+	velocity.y += GRAVITY * delta
 	
 #	move_and_slide returns left over motion. Setting velocity equal
 #   to this value will reset our y velocity whenever we hit the 
@@ -34,8 +33,10 @@ func handle_input():
 	var pressingMovement = true
 	if (Input.is_action_pressed("move_left")):
 		velocity.x += -ACCELERATION
+		animatedSprite.flip_h = false
 	elif (Input.is_action_pressed("move_right")):
 		velocity.x += ACCELERATION
+		animatedSprite.flip_h = true
 	else:
 		pressingMovement = false
 	
