@@ -80,6 +80,7 @@ margin_left = -20.3461
 margin_top = -56.4141
 margin_right = 19.6539
 margin_bottom = -42.4141
+percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

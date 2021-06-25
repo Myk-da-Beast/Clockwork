@@ -19,7 +19,7 @@ animations = [ {
 extents = Vector2( 33.8365, 35.7984 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 533.937
+radius = 152.815
 
 [node name="Clock" type="KinematicBody2D"]
 script = ExtResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clockwork-main.ogg-71938bc17b551d2bd3fc74b8588375b2.oggstr"
+
+[deps]
+
+source_file="res://Assets/clockwork-main.ogg"
+dest_files=[ "res://.import/clockwork-main.ogg-71938bc17b551d2bd3fc74b8588375b2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

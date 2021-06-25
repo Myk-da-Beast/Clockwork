@@ -20,7 +20,10 @@ func _get_transition(delta):
 			elif abs(parent.velocity.x) > 1:
 				return states.run
 		states.run:
-			if Input.is_action_pressed("jump"):
+			if !parent.is_on_floor() and !Input.is_action_just_pressed("jump"):
+				return states.fall
+			if Input.is_action_pressed("jump") && parent.is_on_floor():
+				print("welp")
 				return states.jump
 			elif parent.velocity.x == 0 || abs(parent.velocity.x) < 1:
 				return states.idle

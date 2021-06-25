@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 64
-export var MAX_SPEED = 512
+export var ACCELERATION = 16
+export var MAX_SPEED = 128
 export var FRICTION = 0.25
 export var AERIAL_H_RESISTANCE = 0.02
-export var GRAVITY = 1980
-export var JUMP_FORCE = 980
+export var GRAVITY = 512
+export var JUMP_FORCE = 256
 
 var velocity = Vector2.ZERO
 var deadZone = 0.1
@@ -24,10 +24,10 @@ func _apply_velocity(delta):
 #	move_and_slide returns left over motion. Setting velocity equal
 #   to this value will reset our y velocity whenever we hit the 
 #   ground
-	if (stateMachine.state == stateMachine.states.jump):
+	if (stateMachine.state == stateMachine.states.jump || !is_on_floor()):
 		velocity = move_and_slide_with_snap(velocity, Vector2.ZERO, Vector2.UP)
 	else:
-		velocity = move_and_slide_with_snap(velocity, Vector2(0, 32), Vector2.UP, true)
+		velocity = move_and_slide_with_snap(velocity, Vector2(0, 8), Vector2.UP, true)
 	
 func handle_input():
 	var pressingMovement = true

@@ -1,22 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/door.png" type="Texture" id=1]
+[ext_resource path="res://Assets/sprite_sheet.png" type="Texture" id=1]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 80, 88, 16, 22 )
+
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 35.9087, 32.3888 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 7.45448, 9.54945 )
 
 [node name="Exit" type="Area2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+position = Vector2( 0.222717, 1.55907 )
+shape = SubResource( 3 )
