@@ -1,4 +1,5 @@
 extends Node
+class_name StateMachine
 
 # Current state
 var state = null setget set_state
